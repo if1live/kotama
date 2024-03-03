@@ -50,7 +50,11 @@ class IfPackageNameInAllowlistTest {
 }
 
 class IfMessageContainsDenylistTest {
-    private val denylist = listOf("이벤트", "(광고)")
+    private val denylist = listOf(
+        "이벤트",
+        "(광고)",
+        "매달 내는 돈이에요."
+    )
     private val predicate = ifMessageContainsDenylist(denylist)
 
     @Test
@@ -58,12 +62,34 @@ class IfMessageContainsDenylistTest {
         val notification = MyNotification("com.sample");
         notification.infoText = "(광고) 현금영수증 자동 발급되는 간편결제 이용 약관에 동의해주세요."
         Assert.assertEquals(true, predicate(notification))
+
+        notification.infoText = "매달 내는 돈이에요.\n\n* 알림 끄기는 토스 앱 설정에서"
+        Assert.assertEquals(true, predicate(notification))
     }
 
     @Test
     fun notContains() {
         val notification = MyNotification("com.sample");
         notification.infoText = "대충 광고 아닌 메세지"
+        Assert.assertEquals(false, predicate(notification))
+    }
+}
+
+class IfMessageEqualsDenylistTest {
+    private val denylist = listOf("(이벤트)", "(광고)")
+    private val predicate = ifMessageContainsDenylist(denylist)
+
+    @Test
+    fun equals() {
+        val notification = MyNotification("com.sample");
+        notification.infoText = "(광고)"
+        Assert.assertEquals(true, predicate(notification))
+    }
+
+    @Test
+    fun notEquals() {
+        val notification = MyNotification("com.sample");
+        notification.infoText = "광고"
         Assert.assertEquals(false, predicate(notification))
     }
 }
