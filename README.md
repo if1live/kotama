@@ -1,5 +1,5 @@
 # kotama
-android notification → hijacking → google sheet
+android notification → wiretap → google sheet
 
 ![kotama](./documents/kotama.jpg)
 
