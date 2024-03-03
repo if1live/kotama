@@ -11,9 +11,7 @@ import kotlinx.coroutines.launch
 class MyNotificationListenerService : NotificationListenerService() {
     private val TAG = "MyNotificationListenerService"
 
-    // TODO: 주소 수정
-    private val url = "http://192.168.0.103:3000/"
-    private val sender = MessageSender(url)
+    private val sender = MessageSender(webhookUrl)
 
     private val packageFilter = NotificationFilter()
 

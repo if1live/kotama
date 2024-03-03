@@ -1,5 +1,8 @@
 package kr.ne.shiroko.kotama
 
+// TODO: 주소 수정
+val webhookUrl = "http://192.168.0.103:3000/"
+
 val packageNames_mobilePayments = listOf(
     "com.samsung.android.spay", // Samsung Wallet (Samsung Pay)
     "com.nhn.android.search",   // 네이버 - NAVER
